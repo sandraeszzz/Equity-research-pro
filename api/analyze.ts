@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { GoogleGenAI } from "@google/genai";
-import { demoReports } from "../src/data/demoReports";
+import { demoReports } from "../src/data/demoReports.ts";
 
 const FMP_API_KEY = process.env.FMP_API_KEY;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
