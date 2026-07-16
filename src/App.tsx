@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { demoReports } from "./data/demoReports";
 import { EquityReport } from "./data/types";
 import ReportHeader from "./components/ReportHeader";
 import SummaryTab from "./components/SummaryTab";
@@ -11,12 +10,12 @@ import PremiumTab from "./components/PremiumTab";
 import { Terminal, Clock, User, Award, ShieldAlert, Activity, ChevronRight, HelpCircle } from "lucide-react";
 console.log("APP CARGADA");
 export default function App() {
-  const [selectedReport, setSelectedReport] = useState<EquityReport>(demoReports["AAPL"]);
+const [selectedReport, setSelectedReport] = useState<EquityReport | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [reportSource, setReportSource] = useState<string>("preloaded");
+const [reportSource, setReportSource] = useState<string>("gemini-fmp");
   
   // Custom states for DCF modeler (synchronized on report changes)
   const [customWacc, setCustomWacc] = useState(9.2);
@@ -94,15 +93,10 @@ export default function App() {
   };
 
   // Handle Select predefined reports
-  const handleSelectTicker = async (tick: string) => {
-    setError(null);
-    if (demoReports[tick]) {
-      setSelectedReport(demoReports[tick]);
-      setReportSource("preloaded");
-    } else {
-      await triggerLiveAnalysis(tick);
-    }
-  };
+const handleSelectTicker = async (tick: string) => {
+  setError(null);
+  await triggerLiveAnalysis(tick);
+};
 
   // Live analysis search action
   const handleSearch = async (e: React.FormEvent) => {
@@ -177,7 +171,6 @@ export default function App() {
             </span>
             <div className="flex flex-col gap-1 max-h-[280px] overflow-y-auto custom-scrollbar">
               {recentSearches.map((tick) => {
-                const isPreloaded = !!demoReports[tick];
                 return (
                   <button
                     key={tick}
@@ -194,7 +187,7 @@ export default function App() {
                   >
                     <span>{tick}</span>
                     <span className="text-[10px] text-gray-500 bg-[#161B26] px-1.5 py-0.5 rounded">
-                      {isPreloaded ? "DEMO" : "LIVE"}
+LIVE
                     </span>
                   </button>
                 );
@@ -291,7 +284,7 @@ export default function App() {
                       <li>Pega tu clave de API de Gemini y haz clic en guardar.</li>
                     </ol>
                     <p className="text-[#A1AAB8] pt-1">
-                      <em>Nota: Puedes seguir navegando usando las pestañas pre-cargadas de <strong>AAPL</strong>, <strong>TSLA</strong> y <strong>NVDA</strong> de inmediato sin necesidad de clave API.</em>
+                      <Nota: El motor funciona mediante análisis en tiempo real con FMP + Gemini. Configura tu API Key para activar consultas globales.>
                     </p>
                   </div>
                 )}
@@ -301,7 +294,7 @@ export default function App() {
                   className="rounded bg-emerald-600 px-5 py-2 font-mono text-xs font-bold text-white hover:bg-emerald-500 transition-colors cursor-pointer"
                   type="button"
                 >
-                  VOLVER A MODO DEMO (AAPL)
+                 REINTENTAR ANÁLISIS (AAPL)
                 </button>
               </div>
             </div>
