@@ -46,15 +46,6 @@ export default async function handler(
 
 
   const queryClean = company.trim().toUpperCase();
-
-
-  const matchedKey = Object.keys(demoReports).find(
-    k =>
-      k === queryClean ||
-      demoReports[k].summary.company
-      .toUpperCase()
-      .includes(queryClean)
-  );
   
 
   return res.json({
