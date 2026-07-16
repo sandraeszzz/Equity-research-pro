@@ -284,7 +284,9 @@ LIVE
                       <li>Pega tu clave de API de Gemini y haz clic en guardar.</li>
                     </ol>
                     <p className="text-[#A1AAB8] pt-1">
-                      <Nota: El motor funciona mediante análisis en tiempo real con FMP + Gemini. Configura tu API Key para activar consultas globales.>
+                    <p className="text-[#A1AAB8] pt-1">
+  Nota: El motor utiliza datos financieros en tiempo real de FMP y análisis avanzado con Gemini AI. Configura las API Keys necesarias para habilitar cobertura global.
+</p>
                     </p>
                   </div>
                 )}
