@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { GoogleGenAI } from "@google/genai";
-import { demoReports } from "../src/data/demoReports.ts";
 
 const FMP_API_KEY = process.env.FMP_API_KEY;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -21,11 +20,13 @@ function getGeminiClient() {
   return geminiClient;
 }
 
-
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse
-) {
+) 
+  try {
+
+
 
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -54,16 +55,7 @@ export default async function handler(
       .toUpperCase()
       .includes(queryClean)
   );
-
-
-  if (matchedKey) {
-    return res.json({
-      success:true,
-      report:demoReports[matchedKey],
-      source:"preloaded"
-    });
-  }
-
+  
 
   return res.json({
     success:true,
