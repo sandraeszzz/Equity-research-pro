@@ -64,5 +64,3 @@ return res.json({
 }
 
 }
-
-}
