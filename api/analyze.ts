@@ -23,7 +23,7 @@ function getGeminiClient() {
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse
-) 
+ )  {
   try {
 
 
@@ -48,16 +48,21 @@ export default async function handler(
   const queryClean = company.trim().toUpperCase();
   
 
-  return res.json({
-    success:true,
-    report:{
-      summary:{
-        company:company,
-        ticker:queryClean
-      },
-      message:"Motor Vercel conectado. Falta migrar análisis FMP."
-    },
-    source:"vercel"
+return res.json({
+  success:true,
+  report:{
+    ...
+  },
+  source:"vercel"
+});
+
+} catch (error) {
+  console.error(error);
+  return res.status(500).json({
+    error: "Internal server error"
   });
+}
+
+}
 
 }
